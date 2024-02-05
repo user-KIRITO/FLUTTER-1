@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form action="/api/addProduct" method="POST">
+        <label for="productName">Product Name:</label>
+        <input type="text" id="productName" name="productName" required>
+      
+        <label for="qty">Quantity:</label>
+        <input type="number" id="qty" name="qty" required>
+      
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" step="0.01" required>
+      
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category" required>
+      
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+      
+      
+        <label for="urlKey">URL Key:</label>
+        <input type="text" id="urlKey" name="urlKey" required>
+      
+        <label for="metaTitle">Meta Title:</label>
+        <input type="text" id="metaTitle" name="metaTitle" required>
+      
+        <label for="metaKeyWords">Meta Keywords:</label>
+        <input type="text" id="metaKeyWords" name="metaKeyWords" required>
+      
+        <label for="metaDescription">Meta Description:</label>
+        <textarea id="metaDescription" name="metaDescription" required></textarea>
+      
+        <label for="status">Status:</label>
+        <input type="checkbox" id="status" name="status" value="true">
+      
+        <label for="visibility">Visibility:</label>
+        <input type="checkbox" id="visibility" name="visibility" value="true">
+      
+        <label for="stockAvailable">Stock Available:</label>
+        <input type="checkbox" id="stockAvailable" name="stockAvailable" value="true">
+      
+        <button type="submit">Submit</button>
+      </form>
+      <hr> 
+
+
+        <h1>Image Upload</h1>
+
+        <form class="images">
+          <input type="file" name="image">
+          <input type="file" name="image">
+          <input type="file" name="image">
+          <button type="submit">Submit</button>
+        </form>
+        
+        <hr>
+        <h1>Update Product</h1>
+        <form action="/api/updateProduct" method="POST">
+          <label for="productName">Product Name:</label>
+          <input type="text" id="productName" name="productName" required>
+        
+          <label for="qty">Quantity:</label>
+          <input type="number" id="qty" name="qty" required>
+        
+          <label for="price">Price:</label>
+          <input type="number" id="price" name="price" step="0.01" required>
+        
+          <label for="category">Category:</label>
+          <input type="text" id="category" name="category" required>
+        
+          <label for="description">Description:</label>
+          <textarea id="description" name="description" required></textarea>
+        
+        
+          <label for="urlKey">URL Key:</label>
+          <input type="text" id="urlKey" name="urlKey" required>
+        
+          <label for="metaTitle">Meta Title:</label>
+          <input type="text" id="metaTitle" name="metaTitle" required>
+        
+          <label for="metaKeyWords">Meta Keywords:</label>
+          <input type="text" id="metaKeyWords" name="metaKeyWords" required>
+        
+          <label for="metaDescription">Meta Description:</label>
+          <textarea id="metaDescription" name="metaDescription" required></textarea>
+        
+          <label for="status">Status:</label>
+          <input type="checkbox" id="status" name="status" value="true">
+        
+          <label for="visibility">Visibility:</label>
+          <input type="checkbox" id="visibility" name="visibility" value="true">
+        
+          <label for="stockAvailable">Stock Available:</label>
+          <input type="checkbox" id="stockAvailable" name="stockAvailable" value="true">
+        
+          <button type="submit">Submit</button>
+        </form>
+        
+        
+        
+        <hr> 
+
+
+        <script>
+          const form = document.querySelector('.images');
+          form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const formData = new FormData();
+            const fileInputs = document.querySelectorAll('input[type="file"]');
+            fileInputs.forEach((fileInput) => {
+              formData.append(fileInput.name, fileInput.files[0]);
+            });
+            fetch('/api/uploadImages', {
+              method: 'POST',
+              body: formData
+            })
+            .then((response) => {
+              return response.json();
+            })
+            .then((data) => {
+              console.log(data);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+          });
+        </script>
+
+
+
+       
+</body>
+</html>
